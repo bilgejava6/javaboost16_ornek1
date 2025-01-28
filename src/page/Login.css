@@ -1,0 +1,15 @@
+input{
+    width: 400px;
+    background-color: bisque;
+    color: brown;
+    padding-bottom: 40px;
+    padding-left: 30px;
+}
+
+.buttun-tasarim{
+    background-color: brown;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
