@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import swal from 'sweetalert';
 
 function Login() {
   const [email,setEmail] = useState('');  
@@ -25,14 +26,19 @@ function Login() {
         }) // Buraya email ve password gönderilecek
     }).then(res=> res.json())
     .then(data=>{
-        console.log(data);
+       if(data.code === 400){ // eğer 400 gelir ise kullanıcı adı veya şifre yanlış demektir.
+        //       başlık       mesaj      ikon
+            swal('Hata!',data.message, 'error');
+       }else{ // 200 gelir ise kullanıcı giriş yapmış demektir.
+            swal('Başarılı',data.message,'success');
+       }
     })
   }
   return (
     <div className='container'>
        <div className='row mt-5'>
             <div className='col-4'></div>
-            <div className='col-4 p-3' style={{border: '1px solid red', minHeight: '500px', borderRadius:'20px'}}>
+            <div className='col-4 p-4 shadow-lg rounded-5' style={{border: '1px solid grey', minHeight: '500px', borderRadius:'20px'}}>
                 <div className='text-center m-2'>
                     <img width={150} height={200} src="https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678129-lock-512.png" />
                 </div>
