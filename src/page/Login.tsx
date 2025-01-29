@@ -1,7 +1,13 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router';
 import swal from 'sweetalert';
 
 function Login() {
+    /**
+     * react-router bir sayfadan başka bir sayfaya yönlendirme yapmak için 
+     * useNavigate kullanır.
+     */
+  const navigate = useNavigate();
   const [email,setEmail] = useState('');  
   const [password, setPassword] = useState('');
   const [warning, setWarning] = useState(false);
@@ -30,7 +36,9 @@ function Login() {
         //       başlık       mesaj      ikon
             swal('Hata!',data.message, 'error');
        }else{ // 200 gelir ise kullanıcı giriş yapmış demektir.
-            swal('Başarılı',data.message,'success');
+            swal('Başarılı',data.message,'success').then(()=>{ // tamam tuşuna basıldığında
+                navigate('/'); // anasayfaya yönlendirme yapar.
+            })
        }
     })
   }
@@ -61,8 +69,11 @@ function Login() {
                     <label className="form-label">Şifrenizi giriniz</label>
                     <input onChange={evt=> setPassword(evt.target.value)} type="password" className="form-control" />
                 </div>
-                <div className='text-end'>
+                <div className='text-end mb-4'>
                     <button onClick={doLogin} type='button' className='btn btn-success'>Giriş Yapınız</button>
+                </div>
+                <div className='text-center'>
+                    <a href='/register' className='text-primary'>Hesabınız yok mu? Kayıt olun</a>
                 </div>
             </div>
             <div className='col-4'></div>                    

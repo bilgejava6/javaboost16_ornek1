@@ -63,8 +63,11 @@ function Register() {
                     }
                    
                 </div>
-                <div className='text-end'>
+                <div className='text-end mb-4'>
                     <button onClick={register} type='button' className='btn btn-success'>Üyeliği Tamamla</button>
+                </div>
+                <div className='text-start'>
+                    <a href='/login' className='text-warning'> Giriş yap</a>
                 </div>
             </div>
             <div className="col-4"></div>                
