@@ -6,6 +6,7 @@ import {
 import Login from './page/Login';
 import Home from './page/Home';
 import Register from './page/Register';
+import UrunListesi from './page/UrunListesi';
 function routerpage() {
     // root, sitenin ana dizini 
   return (
@@ -17,7 +18,9 @@ function routerpage() {
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/login'  element={<Login />}/>
-            <Route path='/register'  element={<Register />}/>                
+            <Route path='/register'  element={<Register />}/>         
+            <Route path='/urun-listesi'  element={<UrunListesi />}/>         
+                   
         </Routes>
     </BrowserRouter>
   )
