@@ -75,12 +75,9 @@ function UrunListesi() {
      <div className='container'>
         <div className="row mt-5" >
 
-            <UrunCard ad={urunList[0].ad} aciklama={urunList[0].aciklama} urunFiyati={urunList[0].fiyat} 
-                      promosyon={urunList[0].promosyon} teslimat={urunList[0].teslimat} resim={urunList[0].resim}/>
-            <UrunCard ad={urunList[1].ad} aciklama={urunList[1].aciklama} urunFiyati={urunList[1].fiyat} 
-                      promosyon={urunList[1].promosyon} teslimat={urunList[1].teslimat} resim={urunList[1].resim}/>
-           <UrunCard ad={urunList[2].ad} aciklama={urunList[2].aciklama} urunFiyati={urunList[2].fiyat} 
-                      promosyon={urunList[2].promosyon} teslimat={urunList[2].teslimat} resim={urunList[2].resim}/>
+            <UrunCard urun={urunList[0]}/>
+            <UrunCard urun={urunList[1]}/>
+            <UrunCard urun={urunList[2]}/>
            
         </div>
      </div>
