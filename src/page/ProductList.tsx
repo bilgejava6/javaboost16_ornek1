@@ -1,13 +1,15 @@
 import React,{useEffect, useState} from 'react'
 import { IProduct } from '../model/IProduct';
 import ProductCard from '../component/molecules/ProductCard';
+import { ISepetItem } from '../model/ISepetItem';
+import SepetItem from '../component/molecules/SepetItem';
 function ProductList() {
     /**
      * useState -> react in değişken tanımlama  ve takip etme methodu
      * useState<[DATA TYPE]> -> içerisine veri tipi yazılır, tanımlanan değişkenin türünü belirtiyorsunuz.
      */
   const [products, setProducts] = useState<IProduct[]>([]);
-
+  const [sepet, setSepet] = useState<ISepetItem[]>([]);
   /**
    * useEffect -> react bileşenlerinin değişimini takip ederek kendini tetikleyen method.
    * iki parametresi vardır;
@@ -21,9 +23,29 @@ function ProductList() {
     fetch('https://dummyjson.com/products')
     .then(res => res.json())
     .then(data => setProducts(data.products));
+    setSepet([
+        {
+           resim: "https://productimages.hepsiburada.net/s/349/424-600/110000357018013.jpg/format:webp",
+           markaModel: 'Samsung Galaxy S21',
+           birimFiyat: 10000,
+           adet: 2,
+           toplamFiyat: 20000
+        },{
+            resim: "https://productimages.hepsiburada.net/s/777/424-600/110000798161757.jpg/format:webp",
+            markaModel: 'IPhone 227 Pro Ultara Max',
+            birimFiyat: 1000000,
+            adet: 1,
+            toplamFiyat: 1000000
+        },{
+            resim: "https://images.hepsiburada.net/assets/Bilgisayar/ProductDesc/PRIME-B450M-K-II-P_setting_fff_1_90_end_500_210210.png",
+            markaModel: 'MSİ Anakar',
+            birimFiyat: 25000,
+            adet: 3,
+            toplamFiyat: 75000
+        }
+    ])
   },[]);
 
- console.log('RENDER PRODUCT LIST');
   return (
     <div className='container-fluid'>
         <div className="row">
@@ -47,7 +69,11 @@ function ProductList() {
                             <div className="col-2">Toplam Fiyat</div>                            
                         </div>
                         <hr />
-
+                            {
+                                sepet.map((item,index)=>{
+                                    return <SepetItem item={item}/>
+                                })
+                            }
                         <hr />
                         <div className="row" style={{fontSize: '16px', fontWeight: 'bold'}}>
                             <div className="col-8"></div>
