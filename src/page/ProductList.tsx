@@ -27,7 +27,13 @@ function ProductList() {
   
   },[]);
   const sepeteEkle= (product: IProduct)=>{
-
+    let varMi = sepet.find((x)=>x.markaModel === product.title);
+    if(varMi){
+        varMi.adet++;
+        varMi.toplamFiyat = varMi.adet * varMi.birimFiyat;
+        setToplam(toplam+product.price);
+        return;
+    }
     const item: ISepetItem = {
         adet: 1,
         birimFiyat: product.price,
