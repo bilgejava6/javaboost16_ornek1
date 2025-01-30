@@ -57,6 +57,15 @@ function ProductList() {
     style: 'currency',
     currency: 'TRY',
     });
+    /**
+     * forEach
+     * filter
+     */
+    const sil = (item: ISepetItem)=>{
+        let yeniSepet = sepet.filter((x)=>x!==item);
+        setSepet(yeniSepet);
+        setToplam(toplam-item.toplamFiyat);
+    }
   return (
     <div className='container-fluid'>
         <div className="row">
@@ -82,7 +91,7 @@ function ProductList() {
                         <hr />
                             {
                                 sepet.map((item,index)=>{
-                                    return <SepetItem item={item}/>
+                                    return <SepetItem item={item} sil={sil}/>
                                 })
                             }
                         <hr />
