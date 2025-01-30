@@ -1,14 +1,16 @@
 import React from 'react'
 import { IProduct } from '../../model/IProduct'
 
-function ProductCard(props: {product: IProduct}) {
+function ProductCard(props: {product: IProduct, sepeteEkle: any}) {
   /**
    * String name;
    * User user = new User();
    * name = user.getName();
    */
   const product = props.product;
-  console.log('render prodct card');
+  const sepeteEkle = ()=>{
+    props.sepeteEkle(product);
+  }
   return (
     <div className="col-4 mb-2">
         <div className="card shadow">
@@ -25,7 +27,7 @@ function ProductCard(props: {product: IProduct}) {
                 <li className="list-group-item text-bg-warning"><small>{product.shippingInformation}</small></li>
             </ul>
             <div className="card-body text-end">
-                <input type='button' className="btn btn-warning" value={'Sepete Ekle'} />                           
+                <input type='button' className="btn btn-warning" value={'Sepete Ekle'} onClick={sepeteEkle}/>                           
             </div>
         </div> 
     </div>  

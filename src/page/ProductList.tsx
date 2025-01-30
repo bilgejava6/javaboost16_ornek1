@@ -10,6 +10,7 @@ function ProductList() {
      */
   const [products, setProducts] = useState<IProduct[]>([]);
   const [sepet, setSepet] = useState<ISepetItem[]>([]);
+  const [toplam, setToplam] = useState<number>(0);
   /**
    * useEffect -> react bileşenlerinin değişimini takip ederek kendini tetikleyen method.
    * iki parametresi vardır;
@@ -23,29 +24,23 @@ function ProductList() {
     fetch('https://dummyjson.com/products')
     .then(res => res.json())
     .then(data => setProducts(data.products));
-    setSepet([
-        {
-           resim: "https://productimages.hepsiburada.net/s/349/424-600/110000357018013.jpg/format:webp",
-           markaModel: 'Samsung Galaxy S21',
-           birimFiyat: 10000,
-           adet: 2,
-           toplamFiyat: 20000
-        },{
-            resim: "https://productimages.hepsiburada.net/s/777/424-600/110000798161757.jpg/format:webp",
-            markaModel: 'IPhone 227 Pro Ultara Max',
-            birimFiyat: 1000000,
-            adet: 1,
-            toplamFiyat: 1000000
-        },{
-            resim: "https://images.hepsiburada.net/assets/Bilgisayar/ProductDesc/PRIME-B450M-K-II-P_setting_fff_1_90_end_500_210210.png",
-            markaModel: 'MSİ Anakar',
-            birimFiyat: 25000,
-            adet: 3,
-            toplamFiyat: 75000
-        }
-    ])
+  
   },[]);
-
+  const sepeteEkle= (product: IProduct)=>{
+    const item: ISepetItem = {
+        adet: 1,
+        birimFiyat: product.price,
+        markaModel: product.title,
+        resim: product.thumbnail,
+        toplamFiyat: product.price
+    }
+    setSepet([...sepet,item]);
+    setToplam(toplam+product.price);
+  }
+  let TrPrice = new Intl.NumberFormat('tr-TR', {
+    style: 'currency',
+    currency: 'TRY',
+    });
   return (
     <div className='container-fluid'>
         <div className="row">
@@ -53,7 +48,7 @@ function ProductList() {
                     <div className="row m-5" >
                         {
                         products.map((product,index)=>{
-                            return <ProductCard product={product} />
+                            return <ProductCard product={product} sepeteEkle={sepeteEkle}/>
                         })
                         }           
                     </div>
@@ -78,7 +73,7 @@ function ProductList() {
                         <div className="row" style={{fontSize: '16px', fontWeight: 'bold'}}>
                             <div className="col-8"></div>
                             <div className="col-2">Toplam Fiyat</div>
-                            <div className="col-2">00.000₺</div>
+                            <div className="col-2">{TrPrice.format(toplam)}</div>
                         </div>
                     </div>
             </div>
