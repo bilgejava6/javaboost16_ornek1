@@ -27,6 +27,7 @@ function ProductList() {
   
   },[]);
   const sepeteEkle= (product: IProduct)=>{
+
     const item: ISepetItem = {
         adet: 1,
         birimFiyat: product.price,
@@ -34,6 +35,21 @@ function ProductList() {
         resim: product.thumbnail,
         toplamFiyat: product.price
     }
+    /**
+     * useState ile kullandığınız dğeişkenlere = ile atama yapmazsınız. eğer bu bir dizi ise push()
+     * ekleme yapamazsınız. React bir değişkenin değiştiğini ancak ve ancak set Methodu tetiklenir ise 
+     * anlar. 
+     * ... özel bir kullanımdır. bir dizinin dizi [] paranteslerini siler.
+     * [{},{},{},{}] -> ... -> {},{},{},{}
+     * ...[{},{},{}],{} -> {},{},{},{}
+     * [...[{},{},{}], {}] -> [{},{},{},{}]
+     * -------
+     * let dizi = [];
+     * dizi.push(1);
+     * dizi = [1]
+     * dizi.push(2);
+     * dizi = [1,2]
+     */
     setSepet([...sepet,item]);
     setToplam(toplam+product.price);
   }
