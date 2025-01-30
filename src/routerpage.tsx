@@ -7,6 +7,7 @@ import Login from './page/Login';
 import Home from './page/Home';
 import Register from './page/Register';
 import UrunListesi from './page/UrunListesi';
+import ProductList from './page/ProductList';
 function routerpage() {
     // root, sitenin ana dizini 
   return (
@@ -20,6 +21,7 @@ function routerpage() {
             <Route path='/login'  element={<Login />}/>
             <Route path='/register'  element={<Register />}/>         
             <Route path='/urun-listesi'  element={<UrunListesi />}/>         
+            <Route path='/product-list'  element={<ProductList />}/>         
                    
         </Routes>
     </BrowserRouter>
