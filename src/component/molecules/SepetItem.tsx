@@ -1,8 +1,19 @@
 import React from 'react'
 import { ISepetItem } from '../../model/ISepetItem'
 
-function SepetItem(props: {item: ISepetItem, sil: any }) {
+function SepetItem(props: {item: ISepetItem, sil: any, changeCount: any }) {
   const item = props.item;  
+  /**
+   * Arrow function larda bire bir eşleşme ararız
+   * onClick = (evt: any) =>{}
+   * changeCount = (item: ISepetItem: tip: number) =>{} 
+   * burada iki method bir birine ek olmadığı için kullanım sonsuz döngüye sokar.
+   * onClick= {changeCount(item,0)}  -- HATALI KULLANMIM
+   * 
+   * onClick = {()=>{
+   *  changeCount(item,0)
+   * }}  -- DOĞRU KULLANIM 
+   */
   return (
     <div className="row m-1 p-2" style={{backgroundColor: '#FFF6E3', borderRadius: '5px'}}>
         <div className="col-2">
@@ -15,8 +26,12 @@ function SepetItem(props: {item: ISepetItem, sil: any }) {
         </div>
         <div className="col-5">{item.markaModel}</div>
         <div className="col-2">{item.birimFiyat}</div>
-        <div className="col-1">{item.adet}</div>
-        <div className="col-2">{item.toplamFiyat}</div>                            
+        <div className="col-2">
+           <span onClick={()=>props.changeCount(item,0)} className='text-danger m-1' style={{cursor: 'pointer'}}>-</span>
+           <label className='ms-2 me-2'>{item.adet}</label>
+           <span onClick={()=>props.changeCount(item,1)} className='text-success m-1' style={{cursor: 'pointer'}}>+</span>   
+        </div>
+        <div className="col-1">{item.toplamFiyat}</div>                            
     </div>
   )
 }

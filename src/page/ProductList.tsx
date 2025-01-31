@@ -72,6 +72,52 @@ function ProductList() {
         setSepet(yeniSepet);
         setToplam(toplam-item.toplamFiyat);
     }
+    /**
+     * 
+     * onChangeCount =   (item,tip)=>{}
+     * arttirmaAzaltma = (item,tip)=>{}
+     * changeCount={arttirmaAzaltma}
+     * 
+     * @param item sepete eklenen ürün
+     * @param tip 0 -> azaltma, 1 -> arttırma
+     */
+    const arttirmaAzaltma = (item: ISepetItem, tip: number)=>{
+        /**
+         * eğer ürün adedi 1 ise ve 0 (azaltma butonuna basıldıysa) ise ürünü sil
+         */
+        if(item.adet === 1 && tip === 0){
+            sil(item);
+            return;
+        }
+            /**
+             * !!! DİKKAT !!!
+             * map her bir eleman için belli bir değer dönüşü yapar. eğer if gibi koşullar ile ya da try..cacth gibi
+             * kontrol mekanizmalarında tüm değerleri kapsayacak şekilde değer dönüşü yapmazsanız belli değerler undefined
+             * yani tanımsız kalır. Bu nedenle değişkeninizin tipi değişebilir.
+             * aşağıdaki örnekte  if(urun=== item) koşulu sağlandığında işlem yapmasını istedik ancak eğer 
+             * bu koşul sağlanmadığında yani else{} durumunda ne yapılacağını yazmadığımız için normalde dönmesi gereken guncelSepet
+             * değişken değeri ISepetItem[] olması gerekirken (ISepetItem | undefined)[] olmuştur.
+             */
+            const guncelSepet = sepet.map((urun)=>{
+                if(urun === item){ // eğer ürün bulundu ise
+                    if(tip === 0){ // eğer azaltma butonuna basıldıysa
+                        urun.adet--;
+                        urun.toplamFiyat = urun.adet * urun.birimFiyat;
+                        setToplam(toplam-urun.birimFiyat);
+                    }else{ // eğer arttırma butonuna basıldıysa
+                        urun.adet++;
+                        urun.toplamFiyat = urun.adet * urun.birimFiyat;
+                        setToplam(toplam+urun.birimFiyat);
+                    }
+                 
+                    return urun;
+                }else
+                    return urun;
+            });
+            
+            setSepet(guncelSepet);
+        
+    }
   return (
     <div className='container-fluid'>
         <div className="row">
@@ -97,7 +143,7 @@ function ProductList() {
                         <hr />
                             {
                                 sepet.map((item,index)=>{
-                                    return <SepetItem item={item} sil={sil}/>
+                                    return <SepetItem item={item} sil={sil} changeCount={arttirmaAzaltma}/>
                                 })
                             }
                         <hr />
