@@ -8,6 +8,7 @@ import Home from './page/Home';
 import Register from './page/Register';
 import UrunListesi from './page/UrunListesi';
 import ProductList from './page/ProductList';
+import OrneSayfa from './page/OrneSayfa';
 function routerpage() {
     // root, sitenin ana dizini 
   return (
@@ -21,7 +22,9 @@ function routerpage() {
             <Route path='/login'  element={<Login />}/>
             <Route path='/register'  element={<Register />}/>         
             <Route path='/urun-listesi'  element={<UrunListesi />}/>         
-            <Route path='/product-list'  element={<ProductList />}/>         
+            <Route path='/product-list'  element={<ProductList />}/>  
+            <Route path='/ornek'  element={<OrneSayfa />}/>  
+                   
                    
         </Routes>
     </BrowserRouter>
